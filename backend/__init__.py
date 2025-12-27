@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 from backend.db.main import init_db
+from backend.routes.auth_router import auth_router
 
 
 @asynccontextmanager
@@ -10,5 +11,7 @@ async def lifespan(app: FastAPI):
     yield
     print("Spinning down the server...") 
 
-app = FastAPI()
-
+app = FastAPI(
+    lifespan=lifespan
+)
+app.include_router(auth_router, prefix="/auth", tags=["Authentication"])
