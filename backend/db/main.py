@@ -27,6 +27,7 @@ async def init_db():
         """
         Import the database models here so that they are registered with SQLModel
         """
+        from backend.db.Models import User
         await conn.run_sync(SQLModel.metadata.create_all) # Run synchronously and access the metadata associated with the SQLModel class and create all the tables for it if it is not already present.
 
 
